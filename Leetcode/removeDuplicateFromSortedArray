@@ -1,0 +1,20 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let count = 0;
+    let size = nums.length;
+    for(let i = 0; i < size; i++) {
+        if (nums[i] == nums[i+1]) count++;
+        else nums[i-count] = nums[i];
+    }
+    return size - count;
+};
+
+//1 1 1 1 2
+//1 1 -> count = 1
+//_ 1 1 -> count = 2
+//_ _ 1 1 -> count = 3;
+//_ _ _ 1 1 -> i nya 4 count nya 3 tinggal tuker
+//_ _ _ ^ ^
