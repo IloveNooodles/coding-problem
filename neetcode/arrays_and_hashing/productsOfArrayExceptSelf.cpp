@@ -1,35 +1,22 @@
-class Solution
-{
+class Solution {
 public:
-  vector<int> productExceptSelf(vector<int> &nums)
-  {
-    vector<int> ans;
-    vector<int> prefMult;
-    deque<int> suffMult;
-    int size = nums.size();
-    // compute prefMult
-    int mul = 1;
-    prefMult.push_back(mul);
-    suffMult.push_front(mul);
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> ans;
+        int size = nums.size();
+        int prefProduct = 1, zeroCount = 0;
+        for(int i = 0; i < size; i++){
+            if(nums[i] == 0) zeroCount++;
+            else prefProduct *= nums[i];
+        }
 
-    for (int i = 1; i < size; i++)
-    {
-      mul *= nums[i - 1];
-      prefMult.push_back(mul);
+        for(int i = 0; i < size; i++){
+            int numToAdd = prefProduct;
+            if(nums[i] != 0) numToAdd /= nums[i];
+            if(zeroCount >= 1) numToAdd = 0;
+            if(nums[i] == 0 && zeroCount == 1) numToAdd = prefProduct;
+            ans.push_back(numToAdd);
+        }
+
+        return ans;
     }
-
-    mul = 1;
-    for (int i = size - 2; i >= 0; i--)
-    {
-      mul *= nums[i + 1];
-      suffMult.push_front(mul);
-    }
-
-    for (int i = 0; i < size; i++)
-    {
-      ans.push_back(prefMult[i] * suffMult[i]);
-    }
-
-    return ans;
-  }
 };
