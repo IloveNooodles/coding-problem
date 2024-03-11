@@ -1,26 +1,28 @@
 class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
-        int size = temperatures.size();
-        // stack store the index and the val
-        stack<pair<int, int>> s;
-        map<int, int> m;
-        vector<int> res(size, 0);
+        int i = 1, len = temperatures.size();
+        stack<pair<int,int>> s;
+        s.push({temperatures[0], 0});
+        vector<int> ans(len, 0);
+        for(int i = 1; i < len; i++){
+            while(!s.empty() && i < len){
+                auto [val, idx] = s.top();
 
-        //create hash map
-        for(int i = 0; i < size; i++){
-            m[temperatures[i]] = 0;
-        }
+                if(val >= temperatures[i]){
+                    break;
+                }
 
-        for(int i = 0; i < size; i++){
-            // Create monotonic decrease stack
-            while(!s.empty() && s.top().second < temperatures[i]){
-                auto item = s.top(); s.pop();
-                res[item.first] = (i - item.first);
+                if(val < temperatures[i]){
+                    ans[idx] = i - idx; 
+                    s.pop();
+                    continue;
+                }
             }
-            s.push(make_pair(i, temperatures[i]));
+
+            if(i < len) s.push({temperatures[i], i});
         }
 
-        return res;
+        return ans;
     }
 };
