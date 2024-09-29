@@ -1,3 +1,6 @@
 *.class
 *.exe
 *.pdf
+*.out
+*.DS_Store
+*.in
