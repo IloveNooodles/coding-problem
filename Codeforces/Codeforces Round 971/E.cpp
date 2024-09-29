@@ -3,19 +3,19 @@
 using namespace std;
 using ll = long long;
 
-ll sum_one_to_n(int n)
+ll sum_one_to_n(ll n)
 {
   if (n <= 0)
     return 0;
   return (n * (n + 1)) / 2;
 }
 
-ll prefix_sum(int left, int mid)
+ll prefix_sum(ll left, ll mid)
 {
   return sum_one_to_n(mid) - sum_one_to_n(left);
 }
 
-ll suffix_sum(int mid, int right)
+ll suffix_sum(ll mid, ll right)
 {
   return sum_one_to_n(right) - sum_one_to_n(mid);
 }
@@ -45,25 +45,12 @@ int main()
       {
         right = mid;
       }
-      cout << pref_sum << " " << suf_sum << "\n";
-      cout << left << " " << right << " " << mid << "\n";
     }
-    // pref sum max + suff sum min
-    // middlepoint lebih 1 dan kurang 1
-    // pref sum min + suff sum max
-    // got the middle point
-    // 2 3
-    //   ^
-    // 1 + 2 + 3
-    // 2 + 3 + 4 + 5 (14) - 6 + 7 + 8 (21)
-    // compare i pref and i + 1 suff
+
     ll pref_sum_min = prefix_sum(start - 1, left);
-    cout << "pref sum min" << pref_sum_min << endl;
     ll suff_sum_min = suffix_sum(left, end);
-    ll pref_sum_max = prefix_sum(start - 1, right);
-    cout << "pref sum max" << pref_sum_max << endl;
-    ll suff_sum_max = suffix_sum(right, end);
-    cout << pref_sum_min << " " << suff_sum_min << "\n";
+    ll pref_sum_max = prefix_sum(start - 1, left - 1);
+    ll suff_sum_max = suffix_sum(left - 1, end);
     ans = min(abs(pref_sum_max - suff_sum_max), abs(pref_sum_min - suff_sum_min));
     cout << ans << "\n";
   }
