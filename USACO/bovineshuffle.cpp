@@ -44,27 +44,36 @@ using vii = vector<pi>;
 
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
+void setIO(string s) {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  if (s != "") {
+    freopen((s + ".in").c_str(), "r", stdin);
+    freopen((s + ".out").c_str(), "w", stdout);
+  }
+}
 
 void solve() {
-  ll n, m, max_over_speed = 0;
-  vector<pair<ll, ll>> segment_paris;
-  cin >> n >> m;
-  for (ll i = 0; i < n; i++) {
-    ll segment_length, max_speed;
-    cin >> segment_length >> max_speed;
-    segment_paris.pb({segment_length, max_speed});
+  int N;
+  cin >> N;
+  vi shuffle(N, 0);
+  vi after_shuffle(N, 0);
+  vi before_shuffle(N, 0);
+  for (int i = 0; i < N; i++) {
+    cin >> shuffle[i];
   }
 
-  ll segment_idx = 0;
-  for (ll i = 0; i < m; i++) {
+  for (int i = 0; i < N; i++) {
+    cin >> after_shuffle[i];
   }
-  cout << max_over_speed << endl;
+
+  for (int i = 0; i < N; i++) {
+    int shuff_idx = shuffle[shuffle[shuffle[i] - 1] - 1] - 1;
+    cout << after_shuffle[shuff_idx] << endl;
+  }
 }
 
 int main() {
-  freopen("speeding.in", "r", stdin);
-  freopen("speeding.out", "w", stdout);
-  ios_base::sync_with_stdio(false);
-  cin.tie(nullptr);
+  setIO("shuffle");
   solve();
 }

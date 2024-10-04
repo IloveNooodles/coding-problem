@@ -44,27 +44,37 @@ using vii = vector<pi>;
 
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
+void setIO(string s) {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  if (s != "") {
+    freopen((s + ".in").c_str(), "r", stdin);
+    freopen((s + ".out").c_str(), "w", stdout);
+  }
+}
 
 void solve() {
-  ll n, m, max_over_speed = 0;
-  vector<pair<ll, ll>> segment_paris;
-  cin >> n >> m;
-  for (ll i = 0; i < n; i++) {
-    ll segment_length, max_speed;
-    cin >> segment_length >> max_speed;
-    segment_paris.pb({segment_length, max_speed});
-  }
+  int x, y;
+  cin >> x >> y;
 
-  ll segment_idx = 0;
-  for (ll i = 0; i < m; i++) {
+  int walk = 1;
+  int curpos = x;
+  int oldpos = x;
+  int total_travel = 0;
+  while (true) {
+    curpos = x + walk;
+    walk *= -2;
+    if ((x >= y && curpos <= y) || (y >= x && curpos >= y)) {
+      total_travel += abs(y - oldpos);
+      break;
+    }
+    total_travel += abs(curpos - oldpos);
+    oldpos = curpos;
   }
-  cout << max_over_speed << endl;
+  cout << total_travel;
 }
 
 int main() {
-  freopen("speeding.in", "r", stdin);
-  freopen("speeding.out", "w", stdout);
-  ios_base::sync_with_stdio(false);
-  cin.tie(nullptr);
+  setIO("lostcow");
   solve();
 }

@@ -45,12 +45,18 @@ using vii = vector<pi>;
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
 
+void setIO(string s) {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  if (s != "") {
+    freopen((s + ".in").c_str(), "r", stdin);
+    freopen((s + ".out").c_str(), "w", stdout);
+  }
+}
+
 void solve() {}
 
 int main() {
-  // freopen("textin.inp","r",stdin);
-  // freopen("text.out", "w", stdout);
-  ios_base::sync_with_stdio(false);
-  cin.tie(nullptr);
+  setIO("");
   solve();
 }
