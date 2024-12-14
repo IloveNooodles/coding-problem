@@ -48,6 +48,7 @@ const ll BIG = 1e18;
 void setIO(string s) {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
+  cout.tie(nullptr);
   if (s != "") {
     freopen((s + ".in").c_str(), "r", stdin);
     freopen((s + ".out").c_str(), "w", stdout);

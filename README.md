@@ -1,2 +1,3 @@
 # Code-journey
-This is my coding journey filled with solutions of problem that i worked on in leetcode, codeforces, atcoder, etc.
+
+This is archive of my coding journey from college 2020. I hope this repository can help someone to learn and understand the basics of programming.
