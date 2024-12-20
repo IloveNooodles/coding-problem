@@ -58,32 +58,27 @@ int euclid_distance(int x1, int x2, int y1, int y2) {
 }
 
 void solve() {
-  int n, t;
-  string cow;
-  cin >> n >> t;
-  cin >> cow;
-  // vector<bool> seen(n, false);
-  // for (int i = 0; i < n; i++) {
-  //   if (cow[i] == '1')
-  //     seen[i] = true;
-  //   else
-  //     seen[i] = false;
-  // }
+  int N;
+  cin >> N;
+  vector<int> x(N, 0), y(N, 0);
 
-  vector<pii> cow_interaction(t);
-  for (int i = 0; i < t; i++) {
-    int time, cow1, cow2;
-    cin >> time >> cow1 >> cow2;
-    cow_interaction[i] = {time, {cow1, cow2}};
+  for (int &t : x) {
+    cin >> t;
   }
-  for (auto c : cow_interaction) {
+  for (int &t : y) {
+    cin >> t;
+  }
 
-    for (auto d : cow_interaction) {
+  int ans = 0;
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      ans = max(euclid_distance(x[i], x[j], y[i], y[j]), ans);
     }
   }
+  cout << ans << endl;
 }
 
 int main() {
-  setIO("tracing");
+  setIO("");
   solve();
 }
