@@ -6,10 +6,10 @@
 #include <climits>
 #include <cmath>
 #include <complex>
+#include <cstddef>
 #include <cstring>
 #include <functional>
 #include <iomanip>
-#include <ios>
 #include <iostream>
 #include <map>
 #include <numeric>
@@ -27,7 +27,6 @@ using pi = pair<int, int>;
 using pii = pair<int, pi>;
 using vi = vector<int>;
 using vii = vector<pi>;
-using mib = map<int, bool>;
 
 #define dbg(x)                                                                 \
   cout << "Line(" << __LINE__ << ") -> " << #x << " = " << (x) << endl;
@@ -58,30 +57,20 @@ void setIO(string s) {
 }
 
 void solve() {
-  int n;
-  cin >> n;
-  vector<int> building(n);
-  for (int i = 0; i < n; i++) {
-    cin >> building[i];
-  }
-
-  map<int, vi> m;
-  for (int i = 0; i < n; i++) {
-    m[building[i]].push_back(i);
-  }
-
-  vector<int> freq(3000);
-  int max_building = 1;
-  for (const auto &x : m) {
-    int cur_max = 1;
-    int size = x.second.size();
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < size; j++) {
-        freq[x.second[j] % i]++;
-      }
+  string s;
+  cin >> s;
+  int size = s.size();
+  int cnt = 0;
+  int i = 0;
+  while (i < size) {
+    cnt++;
+    if (i + 1 < size && s[i] == '0' && s[i + 1] == '0') {
+      i += 2;
+    } else {
+      i++;
     }
-    max_building = max(max_building, cur_max);
   }
+  cout << cnt;
 }
 
 int main() {

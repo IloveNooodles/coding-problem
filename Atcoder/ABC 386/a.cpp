@@ -9,7 +9,6 @@
 #include <cstring>
 #include <functional>
 #include <iomanip>
-#include <ios>
 #include <iostream>
 #include <map>
 #include <numeric>
@@ -27,7 +26,6 @@ using pi = pair<int, int>;
 using pii = pair<int, pi>;
 using vi = vector<int>;
 using vii = vector<pi>;
-using mib = map<int, bool>;
 
 #define dbg(x)                                                                 \
   cout << "Line(" << __LINE__ << ") -> " << #x << " = " << (x) << endl;
@@ -58,30 +56,22 @@ void setIO(string s) {
 }
 
 void solve() {
-  int n;
-  cin >> n;
-  vector<int> building(n);
-  for (int i = 0; i < n; i++) {
-    cin >> building[i];
+  int input[4];
+  set<int> s;
+  for (int i = 0; i < 4; i++) {
+    cin >> input[i];
+    s.insert(input[i]);
   }
 
-  map<int, vi> m;
-  for (int i = 0; i < n; i++) {
-    m[building[i]].push_back(i);
+  int freq[16] = {0};
+  for (int i = 0; i < 4; i++) {
+    freq[input[i]]++;
   }
 
-  vector<int> freq(3000);
-  int max_building = 1;
-  for (const auto &x : m) {
-    int cur_max = 1;
-    int size = x.second.size();
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < size; j++) {
-        freq[x.second[j] % i]++;
-      }
-    }
-    max_building = max(max_building, cur_max);
-  }
+  string ans = "No";
+  if (s.size() == 2)
+    ans = "Yes";
+  cout << ans;
 }
 
 int main() {

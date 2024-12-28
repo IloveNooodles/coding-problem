@@ -6,10 +6,10 @@
 #include <climits>
 #include <cmath>
 #include <complex>
+#include <cstddef>
 #include <cstring>
 #include <functional>
 #include <iomanip>
-#include <ios>
 #include <iostream>
 #include <map>
 #include <numeric>
@@ -27,7 +27,6 @@ using pi = pair<int, int>;
 using pii = pair<int, pi>;
 using vi = vector<int>;
 using vii = vector<pi>;
-using mib = map<int, bool>;
 
 #define dbg(x)                                                                 \
   cout << "Line(" << __LINE__ << ") -> " << #x << " = " << (x) << endl;
@@ -58,30 +57,39 @@ void setIO(string s) {
 }
 
 void solve() {
-  int n;
-  cin >> n;
-  vector<int> building(n);
-  for (int i = 0; i < n; i++) {
-    cin >> building[i];
-  }
+  int k;
+  string s, t;
+  cin >> k >> s >> t;
 
-  map<int, vi> m;
-  for (int i = 0; i < n; i++) {
-    m[building[i]].push_back(i);
-  }
-
-  vector<int> freq(3000);
-  int max_building = 1;
-  for (const auto &x : m) {
-    int cur_max = 1;
-    int size = x.second.size();
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < size; j++) {
-        freq[x.second[j] % i]++;
-      }
+  int sSize = s.size();
+  int tSize = t.size();
+  int s_ptr = 0;
+  int t_ptr = 0;
+  int diff = 0;
+  while (s_ptr < sSize && t_ptr < tSize) {
+    if (s[s_ptr] == t[t_ptr]) {
+      s_ptr++;
+      t_ptr++;
+      continue;
     }
-    max_building = max(max_building, cur_max);
+
+    diff++;
+    if (t_ptr + 1 < tSize && s[s_ptr] == t[t_ptr + 1]) {
+      t_ptr++;
+      continue;
+    }
+
+    if (s_ptr + 1 < sSize && s[s_ptr + 1] == t[t_ptr]) {
+      s_ptr++;
+    }
+
+    s_ptr++;
+    t_ptr++;
   }
+  if (diff == 1 || diff == 0 && abs(sSize - tSize) <= 1)
+    cout << "Yes";
+  else
+    cout << "No";
 }
 
 int main() {
