@@ -65,23 +65,23 @@ void solve() {
     cin >> building[i];
   }
 
-  map<int, vi> m;
+  int globalMax = 1;
   for (int i = 0; i < n; i++) {
-    m[building[i]].push_back(i);
-  }
+    for (int j = 1; j < n; j++) {
+      int curHeight = building[i];
+      int curMax = 0;
+      for (int k = i; k < n; k += j) {
+        if (building[k] != curHeight) {
+          curMax = 0;
+          curHeight = building[k];
+        }
 
-  vector<int> freq(3000);
-  int max_building = 1;
-  for (const auto &x : m) {
-    int cur_max = 1;
-    int size = x.second.size();
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < size; j++) {
-        freq[x.second[j] % i]++;
+        curMax++;
+        globalMax = max(curMax, globalMax);
       }
     }
-    max_building = max(max_building, cur_max);
   }
+  cout << globalMax;
 }
 
 int main() {
