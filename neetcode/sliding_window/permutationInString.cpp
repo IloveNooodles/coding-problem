@@ -1,30 +1,39 @@
 class Solution {
 public:
-    int characterReplacement(string s, int k) {
-        int size = s.size();
-        vector<int> freq(26, 0);
-        int left = 0;
-        int maxFreqCount = 0;
-        int longest = 0;
-        for(int right = 0; right < size; right++){
-            freq[s[right] - 'A']++;
-            maxFreqCount = max(maxFreqCount, freq[s[right] - 'A']);
-            // //count the replacement count
-            // //length - maxFreqCount will be the characters need to change
-            while(right - left + 1 - maxFreqCount > k){
-                freq[s[left] - 'A']--;
-                left++;
-                //update maxFreqCount
-                for(int i = 0; i < 26; i++){
-                    maxFreqCount = max(maxFreqCount, freq[i]);
+    bool checkInclusion(string s1, string s2) {
+        int size1 = s1.size();
+        int size2 = s2.size();
+        if(size1 > size2) {
+            checkInclusion(s2, s1);
+        }
+
+        // ensure s1 is the smalest
+        int s1map[26] = {0};
+        int s2map[26] = {0};
+        for(int i = 0; i < size1; i++){
+            s1map[s1[i]-'a']++;
+        }
+
+        int left = 0, right = 0;
+        while(left < size2 && right < size2){
+            s2map[s2[right]-'a']++;
+            bool allSame = true;
+            for(int i = 0; i < 26; i++){
+                if(s1map[i] != s2map[i]) {
+                    allSame = false;
+                    break;
                 }
             }
-            longest = max(longest, right - left + 1);
+            if(allSame) return true;
+            
+            right++;
+            if(right - left + 1 > size1) {
+                s2map[s2[left] - 'a']--;
+                left++;
+            }
+            //cout << left << " " << right << endl;
         }
-        return longest;
+
+        return false;
     }
 };
-
-//0123456789 
-//AABABBA
-//  l  r
