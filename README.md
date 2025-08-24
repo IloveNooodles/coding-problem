@@ -9,6 +9,9 @@ This is my coding learning journey. I tried to solve some of the problem that ca
 - AtCoder
 - Leetcode
 - Codeforces
+- USACO
+- Neetcode
+- CS5S
 
 > [!Note]  
 > I try to update this daily lol, i hope this repository can help someone to learn and understand the basics of programming 
