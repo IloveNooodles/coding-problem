@@ -27,8 +27,8 @@ using pii = pair<int, pi>;
 using vi = vector<int>;
 using vii = vector<pi>;
 
-#define dbg(x)                                                                 \
-  cout << "Line(" << __LINE__ << ") -> " << #x << " = " << (x) << endl;
+#define dbg(x) cout << "Line(" << __LINE__ << ") -> " << #x << " = " << (x) << endl;
+#define dbg_container(c) cout << "Line(" << __LINE__ << ") -> " << #c << " = "; print_container(c); cout << endl;
 #define mp make_pair
 #define pb push_back
 #define fi first
@@ -44,6 +44,24 @@ using vii = vector<pi>;
 
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
+
+template <typename T>
+void print_container(const T& container) {
+  cout << "[ ";
+  for (const auto& elem : container) {
+    cout << elem << " ";
+  }
+  cout << "]";
+}
+
+template <typename K, typename V>
+void print_container(const map<K, V>& m) {
+  cout << "{ ";
+  for (const auto& [key, value] : m) {
+    cout << "{" << key << ": " << value << "} ";
+  }
+  cout << "}";
+}
 
 void setIO(string s) {
   ios_base::sync_with_stdio(false);
