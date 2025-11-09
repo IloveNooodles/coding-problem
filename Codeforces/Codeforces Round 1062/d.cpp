@@ -56,25 +56,53 @@ void setIO(string s) {
   }
 }
 
+vector<int> sieve() {
+  bool isPrime[105];
+  for (int i = 0; i < 105; i++) {
+    isPrime[i] = true;
+  }
+
+  vector<int> ans;
+  for (int i = 2; i * i < 105; i++) {
+    if (isPrime[i]) {
+      for (int p = i * i; p < 105; p += i) {
+        isPrime[p] = false;
+      }
+    }
+  }
+
+  for (int i = 2; i < 100; i++) {
+    if (isPrime[i])
+      ans.pb(i);
+  }
+
+  return ans;
+}
+
 void solve() {
+  vector<int> primes = sieve();
   int t;
   cin >> t;
   for (int i = 0; i < t; i++) {
-    int size;
-    cin >> size;
-    ll minNum = LLONG_MAX, maxNum = LLONG_MIN;
-    for (int j = 0; j < size; j++) {
-      ll x;
-      cin >> x;
-      minNum = min(minNum, x);
-      maxNum = max(maxNum, x);
+    long long n;
+    cin >> n;
+    long long arr[n + 5];
+    for (int j = 0; j < n; j++) {
+      cin >> arr[j];
     }
 
-    // do binser
-    ll left = 2, right = 1e18;
-    while (left <= right) {
-      ll mid = right - (right - left) / 2;
-      gcd()
+    for (long long p : primes) {
+      bool found = false;
+      for (long long j = 0; j < n; j++) {
+        if (gcd(arr[j], p) == 1) {
+          cout << p << endl;
+          found = true;
+          break;
+        }
+      }
+      if (found) {
+        break;
+      }
     }
   }
 }
