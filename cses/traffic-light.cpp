@@ -57,48 +57,29 @@ void setIO(string s) {
 void solve() {
   int x, n;
   cin >> x >> n;
-  bool isEqual = false;
-  int mostRight = x;
-  int mostLeft = 0;
+  set<int> positions = {0, x};
+  multiset<int> segments = {x};
   for (int i = 0; i < n; i++) {
     int p;
     cin >> p;
-    int left = p - mostLeft;
-    int right = mostRight - p;
+    // find left and right neighbors
+    auto right = positions.lb(p);
+    auto left = prev(right);
+    int distance = *right - *left;
 
-    cout << mostRight << endl;
-    cout << p << endl;
-    cout << "p: " << p << "left: " << left << " right: " << right << endl;
-    // 3 - 7 - 11
-    //   5
-    // masuk 5
-    if (isEqual) {
-      // check left and right again
-      ll middle = (mostLeft + mostRight) / 2;
-      if (p >= middle) {
-        mostRight = middle;
-      } else {
-        mostLeft = middle;
-      }
+    auto segment = segments.lb(distance);
+    segments.erase(segment);
+    segments.insert(p - *left);
+    segments.insert(*right - p);
+    positions.insert(p);
 
-      isEqual = false;
-    } else {
-
-      if (left == right) {
-        isEqual = true;
-      }
-
-      // 0 - 5 - 10
-
-      if (left > right) {
-        mostRight = p;
-      } else {
-        mostLeft = p;
-      }
-    }
-
-    cout << "mostLeft: " << mostLeft << " mostRight: " << mostRight << endl;
-    cout << mostRight - mostLeft << endl;
+    cout << *segments.rbegin() << endl;
+    // 0, 8 ----- 8
+    // 3
+    // 8 - 0, 8
+    // 0, 3, 8 --- 3, 5
+    // 3, 8 ---- 3, 5
+    // 0, 3, 6, 8 ---- 3, 3, 2
   }
 }
 
