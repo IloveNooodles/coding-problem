@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool hasAllCodes(string s, int k) {
+        unordered_set<string> code;
+        int size = s.size();
+        int left = 0, right = k;
+        do {
+            string substr = s.substr(left, k);
+            code.insert(substr);
+            left++;
+        } while(left + k <= size);
+
+
+        return (int)pow(2, k) == code.size();
+    }
+};
