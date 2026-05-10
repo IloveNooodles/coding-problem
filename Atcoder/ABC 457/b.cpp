@@ -44,9 +44,11 @@ using vii = vector<pi>;
 
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
+
 void setIO(string s) {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
+  cout.tie(nullptr);
   if (s != "") {
     freopen((s + ".in").c_str(), "r", stdin);
     freopen((s + ".out").c_str(), "w", stdout);
@@ -54,30 +56,25 @@ void setIO(string s) {
 }
 
 void solve() {
-  int N, T;
-  cin >> N >> T;
-  // 0 healthy, 1 sick
-  string state;
-  cin >> state;
-  vector<pii> pairs(T);
-  vi t(T), x(T), y(T);
-  for (int i = 0; i < T; ++i) {
-    cin >> t[i] >> x[i] >> y[i];
-    pairs[i] = {t[i], {x[i], y[i]}};
+  int n;
+  cin >> n;
+  vector<vector<int>> a;
+  for (int i = 0; i < n; i++) {
+    int l;
+    cin >> l;
+    vector<int> b(l, 0);
+    for (int j = 0; j < l; j++) {
+      cin >> b[j];
+    }
+    a.push_back(b);
   }
 
-  vector<pii> candidates;
-  sort(pairs.begin(), pairs.end());
-  int xans, yans, zans;
-  for (auto p : pairs) {
-    auto [x1, x2] = p.second;
-    if (state[x1 - 1] == '0' && state[x2 - 1] == '0') {
-      continue;
-    }
-  }
+  int x, y;
+  cin >> x >> y;
+  cout << a[x - 1][y - 1] << endl;
 }
 
 int main() {
-  setIO("tracing");
+  setIO("");
   solve();
 }

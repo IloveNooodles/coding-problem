@@ -1,20 +1,6 @@
-#include <algorithm>
-#include <array>
-#include <bitset>
 #include <cassert>
-#include <chrono>
-#include <climits>
-#include <cmath>
-#include <complex>
 #include <cstring>
-#include <functional>
-#include <iomanip>
 #include <iostream>
-#include <map>
-#include <numeric>
-#include <queue>
-#include <random>
-#include <set>
 #include <vector>
 using namespace std;
 
@@ -44,40 +30,32 @@ using vii = vector<pi>;
 
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
-void setIO(string s) {
+
+void setIO() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  if (s != "") {
-    freopen((s + ".in").c_str(), "r", stdin);
-    freopen((s + ".out").c_str(), "w", stdout);
-  }
+  cout.tie(nullptr);
+  // if (s != "") {
+  //   freopen((s + ".in").c_str(), "r", stdin);
+  //   freopen((s + ".out").c_str(), "w", stdout);
+  // }
 }
 
 void solve() {
-  int N, T;
-  cin >> N >> T;
-  // 0 healthy, 1 sick
-  string state;
-  cin >> state;
-  vector<pii> pairs(T);
-  vi t(T), x(T), y(T);
-  for (int i = 0; i < T; ++i) {
-    cin >> t[i] >> x[i] >> y[i];
-    pairs[i] = {t[i], {x[i], y[i]}};
+  int n;
+  cin >> n;
+  vector<int> v(n, 0);
+  for (int i = 0; i < n; i++) {
+    cin >> v[i];
   }
 
-  vector<pii> candidates;
-  sort(pairs.begin(), pairs.end());
-  int xans, yans, zans;
-  for (auto p : pairs) {
-    auto [x1, x2] = p.second;
-    if (state[x1 - 1] == '0' && state[x2 - 1] == '0') {
-      continue;
-    }
-  }
+  int x;
+  cin >> x;
+
+  cout << v[x - 1] << endl;
 }
 
 int main() {
-  setIO("tracing");
+  setIO();
   solve();
 }

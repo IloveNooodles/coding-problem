@@ -44,9 +44,11 @@ using vii = vector<pi>;
 
 const int MOD = 1e9 + 7;
 const ll BIG = 1e18;
+
 void setIO(string s) {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
+  cout.tie(nullptr);
   if (s != "") {
     freopen((s + ".in").c_str(), "r", stdin);
     freopen((s + ".out").c_str(), "w", stdout);
@@ -54,30 +56,45 @@ void setIO(string s) {
 }
 
 void solve() {
-  int N, T;
-  cin >> N >> T;
-  // 0 healthy, 1 sick
-  string state;
-  cin >> state;
-  vector<pii> pairs(T);
-  vi t(T), x(T), y(T);
-  for (int i = 0; i < T; ++i) {
-    cin >> t[i] >> x[i] >> y[i];
-    pairs[i] = {t[i], {x[i], y[i]}};
+  ll n, k;
+  cin >> n >> k;
+  vector<vector<int>> x;
+  for (int i = 0; i < n; i++) {
+    int l;
+    cin >> l;
+    vector<int> y(l, 0);
+    for (int j = 0; j < l; j++) {
+      cin >> y[j];
+    }
+    x.push_back(y);
   }
 
-  vector<pii> candidates;
-  sort(pairs.begin(), pairs.end());
-  int xans, yans, zans;
-  for (auto p : pairs) {
-    auto [x1, x2] = p.second;
-    if (state[x1 - 1] == '0' && state[x2 - 1] == '0') {
-      continue;
+  ll len = 0;
+  vector<ll> cs(n, 0);
+  int i = 0;
+  bool found = false;
+  for (; i < n; i++) {
+    cin >> cs[i];
+    ll size = x[i].size();
+    ll prevLen = len;
+    len += size * cs[i];
+    // cout << "cur len: " << len << " size: " << size << endl;
+    if (len >= k) {
+      ll idx = ((k - prevLen - 1) % size);
+      cout << x[i][idx];
+      // 10, 9
+      // 10 - 6 = 4
+      // 8 % 2 == 0
+      found = true;
+      break;
     }
+
+    if (found)
+      break;
   }
 }
 
 int main() {
-  setIO("tracing");
+  setIO("");
   solve();
 }
